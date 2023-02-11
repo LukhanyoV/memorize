@@ -28,8 +28,9 @@
 			<div v-if="isPlaying" class="screen">
 				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
 				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
+				<p><strong>Player: </strong>{{ playerSequence }}</p>
 				<div class="soduko">
-					<div v-for="tile in currentBoard" class="square" :class="{green: tile.color === 'green'}"></div>
+					<div v-for="tile in currentBoard" class="square" @click="playerMove(tile.id)" :class="{green: tile.color === 'green'}"></div>
 				</div>
 			</div>
 		</div>

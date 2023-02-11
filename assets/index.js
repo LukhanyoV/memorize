@@ -43,6 +43,10 @@ const app = {
 		},
 		shuffle(arr) {
 			return !Array.isArray(arr) ? 0 : Math.floor(Math.random()*arr.length)
+		},
+		playerMove(id){
+			this.playerSequence.push(id)
+			this.currentBoard = this.gameBoard.map((tile, index) => id === index ? {...tile, color: 'green'} : {...tile})
 		}
 	},
 	mounted() {
