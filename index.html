@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Memorize</title>
+	<link rel="stylesheet" type="text/css" href="./assets/style.css">
+</head>
+<body>
+	<nav>
+		<ul>
+			<li>
+				<h1>Memorize</h1>
+			</li>
+		</ul>
+	</nav>
+	<div class="container">
+		<div id="app">
+			<h1>{{ appName }}</h1>
+
+			<div class="screen">
+				<ul>
+					<li v-for="rule in rules">{{ rule }}</li>
+				</ul>
+				<button @click="playSequence">START GAME</button>
+			</div>
+
+			<div class="screen">
+				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
+				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
+				<div class="soduko">
+					<div v-for="tile in currentBoard" class="square" :class="{green: tile.color === 'green'}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="./assets/vue.global.min.js"></script>
+	<script type="text/javascript" src="./assets/index.js"></script>
+</body>
+</html>

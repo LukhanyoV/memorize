@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: ghostwhite;
+}
+
+nav {
+	background: lightseagreen;
+	margin: 0;
+	padding: 1em;
+	color: white;
+}
+
+nav > ul > li {
+	list-style: none;
+}
+
+#app {
+	width: 375px;
+/*	background-color: whitesmoke;*/
+	padding: 1em;
+}
+
+#app > h1 {
+	text-align: center;
+	margin: 10px;
+}
+
+.screen {
+	width: 100%;
+	padding: 1em;
+}
+
+.screen > button {
+	background: seagreen;
+	padding: 10px;
+	border: 0;
+	border-radius: 10px;
+	width: max-content;
+	margin: 1em auto;
+	color: white;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+}
+
+.soduko {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	background: white;
+	width: min-content;
+	box-sizing: border-box;
+	margin: 0 auto;
+}
+
+.soduko .square {
+	height: 40px;
+	width: 40px;
+	background: black;
+	color: white;
+	padding: 2em;
+	margin: 0;
+	border: 1px solid white;
+}
+
+.soduko .green {
+	background: green !important;
+}
+
+.soduko .blue {
+	background: blue !important;
+}
+
+.logo {
+	width: 80px;
+}
+
+.logo > div {
+	background: black;
+	border: 1px solid white;
+	width: calc(80px/3);
+	height: calc(80px/3);
+}
+
+.logo > div:nth-child(7) {
+	background: green;
+}
+
+.results > p {
+	margin: 1em;
+	font-style: italic;
+}
+
+.screen ul {
+	margin-top: 1em;
+	margin-left: 20px;
+}
+
+.flex {
+	display: flex;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.align-center {
+	align-items: center;
+}
