@@ -14,11 +14,18 @@ const app = {
 			currentBoard: [],
 			currentSequence: [],
 			playerSequence: [],
-			timer: null
+			timer: null,
+			isPlaying: false
 
 		}
 	},
 	methods: {
+		startGame() {
+			this.isPlaying = true
+			setTimeout(() => {
+				this.playSequence()
+			}, 2000)
+		},
 		randomSquare() {
 			let rand = this.shuffle(this.gameBoard)
 			while(rand === this.currentSequence[this.currentSequence.length-1]) rand = this.shuffle(this.gameBoard)

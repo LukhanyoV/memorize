@@ -18,14 +18,14 @@
 		<div id="app">
 			<h1>{{ appName }}</h1>
 
-			<div class="screen">
+			<div v-if="!isPlaying" class="screen">
 				<ul>
 					<li v-for="rule in rules">{{ rule }}</li>
 				</ul>
-				<button @click="playSequence">START GAME</button>
+				<button @click="startGame">START GAME</button>
 			</div>
 
-			<div class="screen">
+			<div v-if="isPlaying" class="screen">
 				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
 				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
 				<div class="soduko">
