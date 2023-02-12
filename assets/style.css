@@ -114,3 +114,19 @@ button {
 .align-center {
 	align-items: center;
 }
+
+.toggle-buttons {
+	display: inline-flex;
+}
+
+.toggle-button {
+	background: #c2c2c2;
+}
+
+.green-bg {
+	background: green;
+}
+
+.red-bg {
+	background: red;
+}
