@@ -47,6 +47,19 @@ const app = {
 		playerMove(id){
 			this.playerSequence.push(id)
 			this.currentBoard = this.gameBoard.map((tile, index) => id === index ? {...tile, color: 'green'} : {...tile})
+		},
+		verifySequences(computer, player){
+			for(let i = 0; i < computer.length; i++){
+				if(computer[i] !== player[i]) return false
+			}
+			return true
+		},
+		handleSubmit() {
+			const results = this.verifySequences(this.currentSequence, this.playerSequence)
+			alert(results)
+		},
+		clearPlayerSequence() {
+			this.playerSequence = []
 		}
 	},
 	mounted() {

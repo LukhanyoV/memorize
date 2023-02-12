@@ -29,8 +29,12 @@
 				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
 				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
 				<p><strong>Player: </strong>{{ playerSequence }}</p>
+				<div class="flex">
+					<button @click="handleSubmit">submit</button>
+					<button @click="clearPlayerSequence">clear</button>
+				</div>
 				<div class="soduko">
-					<div v-for="tile in currentBoard" class="square" @click="playerMove(tile.id)" :class="{green: tile.color === 'green'}"></div>
+					<div v-for="tile in currentBoard" class="square flex justify-center align-center" @click="playerMove(tile.id)" :class="{green: tile.color === 'green'}">{{ tile.id }}</div>
 				</div>
 			</div>
 		</div>
