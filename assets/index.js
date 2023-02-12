@@ -15,7 +15,8 @@ const app = {
 			currentSequence: [],
 			playerSequence: [],
 			timer: null,
-			isPlaying: false
+			isPlaying: false,
+			autoSubmit: true
 
 		}
 	},
@@ -49,6 +50,9 @@ const app = {
 			if(this.currentSequence.length <= this.playerSequence.length) return
 			this.playerSequence.push(id)
 			this.currentBoard = this.gameBoard.map((tile, index) => id === index ? {...tile, color: 'green'} : {...tile})
+			if(this.currentSequence.length === this.playerSequence.length && this.autoSubmit){
+				setTimeout(this.handleSubmit, 500)
+			}
 		},
 		verifySequences(computer, player){
 			for(let i = 0; i < computer.length; i++){
@@ -67,6 +71,7 @@ const app = {
 				this.playSequence()
 			} else {
 				alert("Nay")
+				this.clearPlayerSequence()
 			}
 		},
 		clearPlayerSequence() {
