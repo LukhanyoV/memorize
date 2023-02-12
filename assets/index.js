@@ -34,8 +34,9 @@ const app = {
 		},
 		playSequence() {
 			this.timer = setInterval(() => {
-				if(this.currentSequence.length >= this.currentLevel + 4){
+				if(this.currentSequence.length >= this.currentLevel){
 					clearInterval(this.timer)
+					this.clearBoard()
 				} else {
 					this.randomSquare()
 				}
@@ -45,6 +46,7 @@ const app = {
 			return !Array.isArray(arr) ? 0 : Math.floor(Math.random()*arr.length)
 		},
 		playerMove(id){
+			if(this.currentSequence.length <= this.playerSequence.length) return
 			this.playerSequence.push(id)
 			this.currentBoard = this.gameBoard.map((tile, index) => id === index ? {...tile, color: 'green'} : {...tile})
 		},
@@ -56,10 +58,23 @@ const app = {
 		},
 		handleSubmit() {
 			const results = this.verifySequences(this.currentSequence, this.playerSequence)
-			alert(results)
+			if(results) {
+				this.clearBoard()
+				alert("Yay")
+				this.currentSequence = []
+				this.playerSequence = []
+				this.currentLevel++
+				this.playSequence()
+			} else {
+				alert("Nay")
+			}
 		},
 		clearPlayerSequence() {
 			this.playerSequence = []
+			this.clearBoard()
+		},
+		clearBoard() {
+			this.currentBoard = this.gameBoard
 		}
 	},
 	mounted() {
@@ -67,7 +82,7 @@ const app = {
 		this.gameBoard = board.map((tile, index) => {
 			return {...tile, id: index}
 		})
-		this.currentBoard = this.gameBoard
+		this.clearBoard()
 	}
 }
 
