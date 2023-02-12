@@ -7,7 +7,9 @@ const app = {
 			rules: [
 				'Memorize and replay the sequence to advance to next level',
 				'Sequence has to replayed in the order you saw it in',
-				'The number of square that make the sequence will increase'
+				'The number of square that make the sequence are equal to the level number',
+				'Clear button can be pressed when you make a mistake while capturing your sequence',
+				'Quit button will end the game if you want to quit'
 			],
 			currentLevel: 1,
 			gameBoard: [],
