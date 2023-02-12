@@ -34,7 +34,7 @@ nav > ul > li {
 	padding: 1em;
 }
 
-.screen > button {
+button {
 	background: seagreen;
 	padding: 10px;
 	border: 0;
