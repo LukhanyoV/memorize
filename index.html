@@ -19,6 +19,7 @@
 			<h1>{{ appName }}</h1>
 
 			<div v-if="!isPlaying && !gameEnd" class="screen">
+				<h2>How to play?</h2>
 				<ul>
 					<li v-for="rule in rules">{{ rule }}</li>
 				</ul>
