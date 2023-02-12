@@ -29,6 +29,12 @@
 				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
 				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
 				<p><strong>Player: </strong>{{ playerSequence }}</p>
+				<p><strong>Auto submit: </strong>
+					<div class="flex toggle-buttons">
+						<button class="toggle-button" @click="autoSubmit = true" :class="{'green-bg': autoSubmit === true}">on</button>
+						<button class="toggle-button" @click="autoSubmit = false" :class="{'red-bg': autoSubmit === false}">off</button>
+					</div>
+				</p>
 				<div class="flex">
 					<button @click="handleSubmit">submit</button>
 					<button @click="clearPlayerSequence">clear</button>
