@@ -16,7 +16,10 @@ const app = {
 			playerSequence: [],
 			timer: null,
 			isPlaying: false,
-			autoSubmit: true
+			autoSubmit: true,
+			feedback: {},
+			playerLives: 3,
+			gameEnd: false
 
 		}
 	},
@@ -25,7 +28,7 @@ const app = {
 			this.isPlaying = true
 			setTimeout(() => {
 				this.playSequence()
-			}, 2000)
+			}, 1000)
 		},
 		randomSquare() {
 			let rand = this.shuffle(this.gameBoard)
@@ -34,6 +37,7 @@ const app = {
 			this.currentBoard = this.gameBoard.map((tile, index) => rand === index ? {...tile, color: 'green'} : {...tile})
 		},
 		playSequence() {
+			this.feedback = {}
 			this.timer = setInterval(() => {
 				if(this.currentSequence.length >= this.currentLevel){
 					clearInterval(this.timer)
@@ -63,16 +67,21 @@ const app = {
 		handleSubmit() {
 			const results = this.verifySequences(this.currentSequence, this.playerSequence)
 			if(results) {
+				this.feedback = {msg: 'Yay! Now loading next level :)', color: 'text-green'}
 				this.clearBoard()
-				alert("Yay")
-				this.currentSequence = []
-				this.playerSequence = []
 				this.currentLevel++
-				this.playSequence()
+				if(this.currentLevel % 10 === 0) this.playerLives++
 			} else {
-				alert("Nay")
+				this.playerLives--
+				this.feedback = {msg: 'Nay! You lost a life, please try again :(', color: 'text-red'}
 				this.clearPlayerSequence()
 			}
+			this.currentSequence = []
+			this.playerSequence = []
+			setTimeout(() => {
+				this.playSequence()
+				this.feedback
+			}, 1500)
 		},
 		clearPlayerSequence() {
 			this.playerSequence = []
@@ -80,6 +89,24 @@ const app = {
 		},
 		clearBoard() {
 			this.currentBoard = this.gameBoard
+			if(this.playerLives <= 0){
+				this.gameOver()
+			}
+		},
+		gameOver() {
+			this.isPlaying = false
+			this.gameEnd = true
+		},
+		newGame() {
+			this.isPlaying = false
+			this.gameEnd = false
+			this.currentSequence = []
+			this.playerSequence = []
+			this.feedback = {}
+			this.playerLives = 3
+			this.currentLevel = 1
+			this.currentBoard = this.gameBoard
+			this.timer = null
 		}
 	},
 	mounted() {

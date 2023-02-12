@@ -18,30 +18,30 @@
 		<div id="app">
 			<h1>{{ appName }}</h1>
 
-			<div v-if="!isPlaying" class="screen">
+			<div v-if="!isPlaying && !gameEnd" class="screen">
 				<ul>
 					<li v-for="rule in rules">{{ rule }}</li>
 				</ul>
 				<button @click="startGame">START GAME</button>
 			</div>
 
-			<div v-if="isPlaying" class="screen">
-				<p><strong>Level: </strong><span>{{ currentLevel }}</span></p>
-				<p><strong>Sequence: </strong>{{ currentSequence }}</p>
-				<p><strong>Player: </strong>{{ playerSequence }}</p>
-				<p><strong>Auto submit: </strong>
-					<div class="flex toggle-buttons">
-						<button class="toggle-button" @click="autoSubmit = true" :class="{'green-bg': autoSubmit === true}">on</button>
-						<button class="toggle-button" @click="autoSubmit = false" :class="{'red-bg': autoSubmit === false}">off</button>
-					</div>
-				</p>
-				<div class="flex">
-					<button @click="handleSubmit">submit</button>
-					<button @click="clearPlayerSequence">clear</button>
-				</div>
+			<div v-if="isPlaying && !gameEnd" class="screen">
+				<h3>Level:<span>{{ currentLevel }}</span></h3>
+				<h3>Lives: {{ playerLives }}</h3>
+				<h3>Played: {{ playerSequence }}</h3>
+				<h3 v-if="feedback.msg" :class="feedback.color">{{ feedback.msg }}</h3>
+				<h3 v-else>Memorize and replay the sequence</h3>
+				<button @click="clearPlayerSequence">clear</button>
+				<button @click="gameOver" class="red-bg">quit</button>
 				<div class="soduko">
 					<div v-for="tile in currentBoard" class="square flex justify-center align-center" @click="playerMove(tile.id)" :class="{green: tile.color === 'green'}">{{ tile.id }}</div>
 				</div>
+			</div>
+
+			<div v-if="gameEnd" class="screen">
+				<h3>Level reached: {{ currentLevel }}</h3>
+				<!-- <h3>Game Time: {{ gameTime }}</h3> -->
+				<button @click="newGame">NEW GAME</button>
 			</div>
 		</div>
 	</div>
