@@ -17,6 +17,8 @@ const app = {
 			currentSequence: [],
 			playerSequence: [],
 			timer: null,
+			countUp: null,
+			countUpKeep: 0,
 			isPlaying: false,
 			autoSubmit: true,
 			feedback: {},
@@ -30,6 +32,7 @@ const app = {
 			this.isPlaying = true
 			setTimeout(() => {
 				this.playSequence()
+				this.countUp = setInterval(() => this.countUpKeep++, 1000)
 			}, 1000)
 		},
 		randomSquare() {
@@ -96,6 +99,7 @@ const app = {
 			}
 		},
 		gameOver() {
+			clearInterval(this.countUp)
 			this.isPlaying = false
 			this.gameEnd = true
 		},
@@ -109,6 +113,8 @@ const app = {
 			this.currentLevel = 1
 			this.currentBoard = this.gameBoard
 			this.timer = null
+			this.countUpKeep = 0
+			this.countUp = null
 		}
 	},
 	mounted() {
@@ -117,6 +123,24 @@ const app = {
 			return {...tile, id: index}
 		})
 		this.clearBoard()
+	},
+	computed: {
+		gameTime() {
+			var distance = this.countUpKeep
+			var days = Math.floor(distance / (60 * 60 * 24));
+			var hours = Math.floor((distance % (60 * 60 * 24)) / (60 * 60));
+			var minutes = Math.floor((distance % (60 * 60)) / (60));
+			var seconds = Math.floor((distance % (60)));
+			if(days > 0){
+				return `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`
+			} else if(hours > 0){
+				return `${hours} hours ${minutes} minutes ${seconds} seconds`
+			} else if(minutes > 0){
+				return `${minutes} minutes ${seconds} seconds`
+			} else {
+				return `${seconds} seconds`
+			}
+		}
 	}
 }
 
